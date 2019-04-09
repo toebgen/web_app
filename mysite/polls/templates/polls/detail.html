@@ -1,6 +1,14 @@
 <h1>{{ question.question_text }}</h1>
-<ul>
-    {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
-    {% endfor %}
-</ul>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<!-- Using method="post" (as opposed to method="get") is very important, because the act of submitting this form will alter data server-side. Whenever you create a form that alters data server-side, use method="post". -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+<!-- For Cross Site Request Forgeries -->
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Vote">
+</form>
