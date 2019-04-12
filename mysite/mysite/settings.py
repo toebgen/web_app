@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # My apps
+    'kicker.apps.KickerConfig',
     'polls.apps.PollsConfig',
 
     # Default apps
