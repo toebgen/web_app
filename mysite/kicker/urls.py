@@ -10,4 +10,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     # ex: /kicker/3/
     path('<int:player_id>/', views.player, name='player'),
+    # ex: /kicker/add_player/
+    path('add_player/', views.add_player, name='add_player'),
 ]
