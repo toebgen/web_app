@@ -11,6 +11,6 @@ def index(request):
     return render(request, 'kicker/index.html', context)
 
 
-def detail(request, player_id):
+def player(request, player_id):
     player = get_object_or_404(Player, pk=player_id)
     return render(request, 'kicker/player.html', {'player': player})

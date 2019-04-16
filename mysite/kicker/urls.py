@@ -9,5 +9,5 @@ urlpatterns = [
     # ex: /kicker/
     path('', views.index, name='index'),
     # ex: /kicker/3/
-    path('<int:player_id>/', views.detail, name='detail'),
+    path('<int:player_id>/', views.player, name='player'),
 ]
