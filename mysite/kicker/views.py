@@ -3,8 +3,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-from .forms import PlayerForm
-from .models import Player
+from .forms import GameForm, PlayerForm
+from .models import Game, Player
 
 
 def index(request):
@@ -44,3 +44,27 @@ def add_player(request):
     # }
 
     return render(request, 'kicker/add_player.html', {'form': form})
+
+def add_game(request):
+    if request.method == "POST":
+        # Create a form instance and populate it with data from the request (binding)
+        form = GameForm(request.POST)
+
+        # Check if the form is valid
+        if form.is_valid():
+            game = form.save(commit=False)
+            game.home_player_1 = form.cleaned_data['home_player_1']
+            game.home_player_2 = form.cleaned_data['home_player_2']
+            game.guest_player_1 = form.cleaned_data['guest_player_1']
+            game.guest_player_2 = form.cleaned_data['guest_player_2']
+            game.date = timezone.now()
+            game.save()
+
+            # redirect to a new URL
+            return render(request, 'kicker/index.html', {'game': game})
+
+    else:
+        # If this is a GET (or any other method) create the default form
+        form = GameForm()
+    
+    return render(request, 'kicker/add_game.html', {'form': form})

@@ -1,4 +1,5 @@
 {% if latest_player_list %}
+Latest players:
     <ul>
     {% for player in latest_player_list %}
         <li><a href="{% url 'kicker:player' player.id %}">{{ player.name }}</a></li>
@@ -9,3 +10,5 @@
 {% endif %}
 
 <a href="{% url 'kicker:add_player' %}">Add new player</a>
+<br>
+<a href="{% url 'kicker:add_game' %}">Add new game</a>
