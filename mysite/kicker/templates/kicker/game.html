@@ -1,0 +1,15 @@
+<h1>{{ game.date }}</h1>
+
+Game ID: {{ game.id }}
+<br>
+{{ game.home_player_1 }}/{{ game.home_player_2 }} {{ game.home_goals }} - {{ game.guest_goals }} {{ game.guest_player_1 }}/{{ game.guest_player_2 }}
+
+<br><br>
+More to come here:
+<ul>
+    <li>Game Stats</li>
+    <li>Make Player Names Links</li>
+    <li>More detailed information to player</li>
+</ul>
+
+<a href="{% url 'kicker:index' %}">Back to Player List</a>

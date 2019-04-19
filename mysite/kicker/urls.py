@@ -14,4 +14,6 @@ urlpatterns = [
     path('add_player/', views.add_player, name='add_player'),
    # ex: /kicker/add_game/
     path('add_game/', views.add_game, name='add_game'),
+   # ex: /kicker/game/2
+    path('game/<int:game_id>', views.game, name='game'),
 ]

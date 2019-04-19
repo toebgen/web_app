@@ -45,6 +45,12 @@ def add_player(request):
 
     return render(request, 'kicker/add_player.html', {'form': form})
 
+
+def game(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+    return render(request, 'kicker/game.html', {'game': game})
+
+
 def add_game(request):
     if request.method == "POST":
         # Create a form instance and populate it with data from the request (binding)
@@ -61,7 +67,7 @@ def add_game(request):
             game.save()
 
             # redirect to a new URL
-            return render(request, 'kicker/index.html', {'game': game})
+            return render(request, 'kicker/game.html', {'game': game})
 
     else:
         # If this is a GET (or any other method) create the default form
