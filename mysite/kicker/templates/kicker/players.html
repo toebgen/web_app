@@ -1,0 +1,16 @@
+<h1>Player List</h1>
+
+{% if latest_player_list %}
+Latest players:
+    <ul>
+    {% for player in latest_player_list %}
+        <li><a href="{% url 'kicker:player' player.id %}">{{ player.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No players have signed up yet.</p>
+{% endif %}
+
+<a href="{% url 'kicker:add_player' %}">Add new player</a>
+<br>
+<a href="{% url 'kicker:index' %}">Back to Index</a>

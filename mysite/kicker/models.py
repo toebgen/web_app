@@ -9,7 +9,8 @@ class Player(models.Model):
     join_date = models.DateTimeField('date joined')
 
     def __str__(self):
-        return f'{self.id}: {self.name} {self.join_date.strftime("%Y-%m-%d")}'
+        return f'{self.name}'
+
 
 class Game(models.Model):
     # Date and time of the game

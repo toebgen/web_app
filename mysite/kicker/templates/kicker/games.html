@@ -1,0 +1,16 @@
+<h1>Games List</h1>
+
+{% if latest_games_list %}
+Latest games:
+    <ul>
+    {% for game in latest_games_list %}
+        <li><a href="{% url 'kicker:game' game.id %}">{{ game }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No recent games in database.</p>
+{% endif %}
+
+<a href="{% url 'kicker:add_game' %}">Add new game</a>
+<br>
+<a href="{% url 'kicker:index' %}">Back to Index</a>

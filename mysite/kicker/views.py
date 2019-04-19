@@ -8,10 +8,22 @@ from .models import Game, Player
 
 
 def index(request):
+    return render(request, 'kicker/index.html')
+
+
+def players(request):
     latest_player_list =  Player.objects.order_by('-join_date')[:50]
     context = {'latest_player_list': latest_player_list}
-    output = ', '.join([p.name for p in latest_player_list])
-    return render(request, 'kicker/index.html', context)
+    # output = ', '.join([p.name for p in latest_player_list])
+    return render(request, 'kicker/players.html', context)
+
+
+def games(request):
+    latest_games_list =  Game.objects.order_by('date')[:50]
+    print(len(latest_games_list))
+    context = {'latest_games_list': latest_games_list}
+    # output = ', '.join([str(g.id) for g in latest_games_list])
+    return render(request, 'kicker/games.html', context)
 
 
 def player(request, player_id):
