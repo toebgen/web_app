@@ -1,5 +1,6 @@
 
 from django.http import Http404, HttpResponseRedirect
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
@@ -27,8 +28,27 @@ def games(request):
 
 
 def player(request, player_id):
+    # Get player instance
     player = get_object_or_404(Player, pk=player_id)
-    return render(request, 'kicker/player.html', {'player': player})
+
+    # Get number of games played
+    # TODO Somehow use a method from the class instead?!
+    total_games_played = Game.objects.filter(Q(home_player_1=player) |
+                                             Q(home_player_2=player) |
+                                             Q(guest_player_1=player) |
+                                             Q(guest_player_2=player))
+    num_total_games_played = len(total_games_played)
+
+    # TODO Get number of games won
+    num_total_games_won = 0
+    
+    # Prepare Player page
+    context = {
+        'player': player,
+        'num_total_games_played': num_total_games_played,
+        'num_total_games_won': num_total_games_won,
+    }
+    return render(request, 'kicker/player.html', context)
 
 
 def add_player(request):
