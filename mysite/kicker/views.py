@@ -41,12 +41,23 @@ def player(request, player_id):
 
     # TODO Get number of games won
     num_total_games_won = 0
+    for game in total_games_played:
+        if game.is_winner_team_member(player):
+            num_total_games_won += 1
     
+    # Win ratio
+    if num_total_games_played > 0:
+        win_ratio = num_total_games_won / num_total_games_played
+    else:
+        win_ratio = 0.0
+    win_ratio = win_ratio * 100  # in %
+
     # Prepare Player page
     context = {
         'player': player,
         'num_total_games_played': num_total_games_played,
         'num_total_games_won': num_total_games_won,
+        'win_ratio': win_ratio,
     }
     return render(request, 'kicker/player.html', context)
 
